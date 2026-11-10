@@ -1,0 +1,33 @@
+name: Corregir autores de Denilson
+
+on:
+  push:
+    branches:
+      - codex/rewrite-authors-denilson-20261110
+
+permissions:
+  contents: write
+
+jobs:
+  corregir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Preparar publicación
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reemplazar únicamente los cuatro commits
+        env:
+          EXPECTED_OLD: 03f4d8dbd7347bed29c0b2424b35609e497f4f05
+          EXPECTED_NEW: 1516640bf2be93d20b6561649d098a6910426869
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_OLD"
+          base64 -d .github/denilson-autores.bundle.b64 > /tmp/denilson-autores.bundle
+          git bundle verify /tmp/denilson-autores.bundle
+          git fetch /tmp/denilson-autores.bundle HEAD:refs/heads/denilson-autores
+          test "$(git rev-parse denilson-autores)" = "$EXPECTED_NEW"
+          test "$(git rev-parse denilson-autores^{tree})" = "$(git rev-parse origin/main^{tree})"
+          git push --force-with-lease=refs/heads/main:$EXPECTED_OLD origin denilson-autores:main
