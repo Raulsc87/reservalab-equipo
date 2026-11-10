@@ -1,0 +1,48 @@
+openapi: 3.0.3
+
+info:
+  title: Notificaciones ReservaLab
+  version: 1.0.0
+
+paths:
+  /health:
+    get:
+      responses:
+        "200":
+          description: Servicio disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, service]
+                properties:
+                  status:
+                    type: string
+                    enum: ["ok"]
+                  service:
+                    type: string
+                    enum: ["notifications-mock"]
+
+  /notifications:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "202":
+          description: Notificacion aceptada
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, message]
+                properties:
+                  status:
+                    type: string
+                    enum: ["accepted"]
+                  message:
+                    type: string
+                    enum: ["Notificacion recibida"]

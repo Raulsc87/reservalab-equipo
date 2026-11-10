@@ -1,0 +1,135 @@
+{
+  "uuid": "3628764f-74d7-40e7-bdab-68eaf8c043db",
+  "lastMigration": 33,
+  "name": "Notificaciones ReservaLab",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "0bb89ff0-f929-4cba-91ff-5aac92ecfefa",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "health",
+      "responses": [
+        {
+          "uuid": "9e70f94c-6ba6-472c-8fe0-d594604dad3b",
+          "body": "{\n  \"status\": \"{{oneOf 'ok'}}\",\n  \"service\": \"{{oneOf 'notifications-mock'}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Servicio disponible",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "a7e1d6c9-799c-459d-8f52-d8b53a1f628d",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "notifications",
+      "responses": [
+        {
+          "uuid": "ed8f4013-9950-412b-8ee5-2bded371122b",
+          "body": "{\n  \"status\": \"{{oneOf 'accepted'}}\",\n  \"message\": \"{{oneOf 'Notificacion recibida'}}\"\n}",
+          "latency": 0,
+          "statusCode": 202,
+          "label": "Notificacion aceptada",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "0bb89ff0-f929-4cba-91ff-5aac92ecfefa"
+    },
+    {
+      "type": "route",
+      "uuid": "a7e1d6c9-799c-459d-8f52-d8b53a1f628d"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
