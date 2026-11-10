@@ -1,0 +1,1 @@
+ALTER TABLE "spaces" ADD COLUMN "building" varchar(100) DEFAULT 'Sin asignar' NOT NULL;
